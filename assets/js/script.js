@@ -1,4 +1,4 @@
-tareas = [
+let tareas = [
   { id: 1, mision: "Hacer el aseo", realizada: false },
   { id: 2, mision: "Hacer la cama", realizada: false },
   { id: 3, mision: "Pasear al perro", realizada: false },
@@ -18,13 +18,18 @@ boton.addEventListener("click", () => {
 
 agregar = () => {
   i++;
-  ids = tareas[tareas.length - 1 ].id;
+  ids = tareas[tareas.length - 1].id;
   ids++;
   nuevaTarea = { id: ids, mision: input.value, realizada: false };
   tareas.push(nuevaTarea);
   actualizar();
 };
 
+function realized(id) {
+  tarea = tareas.filter((element) => element.id == id)[0];
+  tarea.realizada = !tarea.realizada;
+  actualizar();
+}
 borrar = (id) => {
   i--;
   indice = tareas.findIndex((numero) => numero.id == id);
@@ -51,26 +56,14 @@ actualizar = () => {
           <button onclick="borrar(${tarea.id})">X</button>
           </th>
           <th>
-          <input  type="checkbox" id="checkbox${tarea.id}"  class="checkbox" onclick="realized(${tarea.id})">
+          
+          <button id='checkbox${tarea.id}' onclick='realized(${tarea.id})'}>Cambiar</button>
           </th>
-      </tr> 
-      `
-     /*  if (tarea.realizada) {
-        document.querySelector(`#checkbox${tarea.id}`).setAttribute('checked', 'checked');
-      } */
+      </tr>`;
   }
   ready = echas.innerHTML = tareas.filter(
     (element) => element.realizada == true
   ).length;
   tabla.innerHTML = html;
 };
-
-
-
-function realized(id) {
-  tarea = tareas.filter((element) => element.id == id)[0];
-  tarea.realizada = !tarea.realizada;
-  actualizar();
-}
-
 actualizar();
